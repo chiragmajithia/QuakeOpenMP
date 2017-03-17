@@ -103,7 +103,7 @@
 	
 	The \textit{default} clause allows the user to specify a default scope for all variables defined before the parallel region and extends it to the parallel region. That is, if the default scope of a variable is \textit{shared}, all the pre-defined variable upto the start of parallel region, remain shared in the parallel region. (There is no support of \textit{default private} and \textit{default first private} in C/C++). The clause used during the project is default \textit{\textbf{None}}. This directive requires that the programmer explicitly scope all variables.
 	 
-	 A race condition is an undesirable situation that occurs when a device or system attempts to perform two or more operations  on a single variable at the same time. This race conditions are caused by shared variables that really should have been declared private. Start by looking at the variables inside the parallel regions and make sure that the variables are declared private when necessary. It was used to debug the parallel construct at line ~ 287 in the sequential code, which created erroneous results.
+	 A race condition is an undesirable situation that occurs when a device or system attempts to perform two or more operations  on a single variable at the same time. This race conditions are caused by shared variables that really should have been declared private. By looking at the variables inside the parallel regions and making sure that the variables are declared private one by one, helps resolve the bug. It was used to debug the parallel construct at line ~ 287 in the sequential code, which created erroneous results.
 	 
 	 By default, all the variables are \textit{shared}.\\
 	 
