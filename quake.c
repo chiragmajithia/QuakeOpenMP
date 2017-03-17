@@ -1274,15 +1274,15 @@ void smvp(int nodes, double (*A)[3][3], int *Acol, int *Aindex,
     }
   }
 
-#pragma omp parallel private(my_cpu_id) shared(A,Aindex,w1,w2)
+#pragma omp parallel private(my_cpu_id,i,Anext,Alast,col,sum0,sum1,sum2)
 {
 #ifdef _OPENMP
   my_cpu_id = omp_get_thread_num();
 #else
    my_cpu_id=0;
 #endif
+}
 
- #pragma omp for private(i,Anext,Alast,col,sum0,sum1,sum2) firstprivate(nodes) 
   for (i = 0; i < nodes; i++) {
     Anext = Aindex[i];
     Alast = Aindex[i + 1];
@@ -1323,9 +1323,7 @@ void smvp(int nodes, double (*A)[3][3], int *Acol, int *Aindex,
     w1[my_cpu_id][i].second += sum1;
     w1[my_cpu_id][i].third += sum2;
   }
-}
 
-#pragma omp parallel for private(j) collapse(2) firstprivate(nodes,numthreads)
   for (i = 0; i < nodes; i++) {
     for (j = 0; j < numthreads; j++) {
       if (w2[j][i]) {
@@ -1570,35 +1568,31 @@ int i, j, k;
 
 
   /* Initializations */
-   #pragma omp parallel  
-    { 
-      #pragma omp for nowait private(i) 
-        for (i = 0; i < ARCHnodes; i++) {
-          nodekind[i] = 0;
-          for (j = 0; j < 3; j++) {
-            M[i][j] = 0.0;
-            C[i][j] = 0.0;
-            M23[i][j] = 0.0;
-            C23[i][j] = 0.0;
-            V23[i][j] = 0.0;
-            disp[0][i][j] = 0.0;
-            disp[1][i][j] = 0.0;
-            disp[2][i][j] = 0.0;
-          }
-        }
-     #pragma omp for nowait private(i)
-        for (i = 0; i < ARCHelems; i++) {
-          source_elms[i] = 1;
-        }
 
-     #pragma omp for nowait private(i)
-        for (i = 0; i < ARCHmatrixlen; i++) {
-          for (j = 0; j < 3; j++) {
-            for (k = 0; k < 3; k++) {
-              K[i][j][k] = 0.0;
-            }
-          }
-        }
+  for (i = 0; i < ARCHnodes; i++) {
+    nodekind[i] = 0;
+    for (j = 0; j < 3; j++) {
+      M[i][j] = 0.0;
+      C[i][j] = 0.0;
+      M23[i][j] = 0.0;
+      C23[i][j] = 0.0;
+      V23[i][j] = 0.0;
+      disp[0][i][j] = 0.0;
+      disp[1][i][j] = 0.0;
+      disp[2][i][j] = 0.0;
     }
+  }
+
+  for (i = 0; i < ARCHelems; i++) {
+    source_elms[i] = 1;
+  }
+
+  for (i = 0; i < ARCHmatrixlen; i++) {
+    for (j = 0; j < 3; j++) {
+      for (k = 0; k < 3; k++) {
+        K[i][j][k] = 0.0;
+      }
+    }
+  }
 }
 /*--------------------------------------------------------------------------*/ 
