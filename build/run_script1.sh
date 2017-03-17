@@ -10,8 +10,7 @@
 #SBATCH --export=OMP_NUM_THREADS=1
 
 module load gcc
-gcc -fopenmp -o quake_seq -pg ../quake.c -lm
+gcc -fopenmp -o quake_seq ../quake.c -lm
 
 time  ./quake_seq < ../input/quake.in
-echo "sequential code"
-gprof quake_seq gmon.out > ../output/final/analysis.seq.txt
+echo "sequential code -no debug"

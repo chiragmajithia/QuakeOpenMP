@@ -1,7 +1,7 @@
 quake: Reading nodes.
 quake: Reading elements.
 quake: Reading sparse matrix structure.
-./quake: Beginning simulation.
+./quake_omp: Beginning simulation.
 
 CASE SUMMARY
 Fault information
@@ -19,7 +19,7 @@ The source is node 5903 at (32.250000  24.364300  -11.200000)
 The epicenter is node 16745 at (32.250000  23.687500  0.000000)
 
 Time step 30
-numthreads = 2
+numthreads = 16
 5903: -3.42e-02 -3.11e-02 -4.03e-02
 16745: 9.04e-35 -8.75e-34 4.41e-33
 Time step 60
@@ -406,5 +406,5 @@ Time step 3840
 30169 nodes 151173 elems 3855 timesteps
 
 Done. Terminating the simulation.
-92.138u 0.059s 1:18.06 118.0%	0+0k 0+2104io 0pf+0w
-parallel no change with 2 threads
+102.537u 0.049s 0:07.06 1452.8%	0+0k 0+2072io 0pf+0w
+parallel with 16 threads
