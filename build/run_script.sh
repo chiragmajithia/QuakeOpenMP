@@ -5,7 +5,7 @@
 #SBATCH --mem-per-cpu=12288
 #SBATCH --mail-user=chiragm@terpmail.umd.edu
 #SBATCH --mail-type=END
-#SBATCH --output="../output/final/out.seq.1"
+#SBATCH --output="../output/final/out.seq.dbg.1"
 #SBATCH -p debug
 #SBATCH --export=OMP_NUM_THREADS=1
 

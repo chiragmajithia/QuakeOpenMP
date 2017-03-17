@@ -9,7 +9,7 @@
      Rise time: 0.600000 sec
      Time step: 0.002400 sec
   Orientation:  strike: 1.937315
-./quake_omp: Beginning simulation.
+./quake_seq: Beginning simulation.
 16745: -1.01e-04 5.90e-03 -1.06e-01
 16745: -1.27e-03 -7.90e-03 1.43e-02
 16745: -1.59e-03 6.73e-03 -7.15e-02
@@ -267,7 +267,7 @@
 5903: -4.06e+00 -4.52e+00 -5.86e+00
 5903: -4.08e+00 -4.46e+00 -5.78e+00
 5903: -7.38e-01 -6.95e-01 -9.22e-01
-71.100u 0.034s 1:11.33 99.7%	0+0k 15584+2072io 0pf+0w
+75.703u 0.023s 1:16.20 99.3%	0+0k 0+2104io 0pf+0w
 CASE SUMMARY
 Done. Terminating the simulation.
 Excitation characteristics
@@ -404,7 +404,7 @@ Time step 930
 Time step 960
 Time step 990
 numthreads = 1
-parallel with 1 threads
 quake: Reading elements.
 quake: Reading nodes.
 quake: Reading sparse matrix structure.
+sequential code
